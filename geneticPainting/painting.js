@@ -28,7 +28,7 @@ function Painting(dna_, x_, y_) {
     var a = map(genes[4],0,1,0.03,0.2);
     var xInc =  floor(rectWidth/(map(genes[5],0, 1,20,250)));
     var xoffInc = map(genes[6], 0, 1, 0.008, 0.012);
-    var yoffInc = map(genes[7], 0, 1, 0.001, 0.05);
+    var yoffInc = map(genes[7], 0, 1, 0.001, 0.005)*(rectHeight/height) ;
     var xoffOffset = genes[8]*100;
     
     //var yMax = map(genes[7], 0, 1, 3*rectHeight/4, rectHeight);
@@ -76,7 +76,7 @@ function Painting(dna_, x_, y_) {
     xoff += xoffInc; //genes7
   }
   // increment y dimension for noise
-  yoff += 0.003; //genes 8
+  yoff += yoffInc;// 0.003; //genes 8
  
   endShape();
   pop();
