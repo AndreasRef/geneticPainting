@@ -27,8 +27,9 @@ function Painting(dna_, x_, y_) {
     var b = map(genes[2], 0,1,0.5,1);
     var a = map(genes[4],0,1,0.03,0.2);
     var xInc =  floor(rectWidth/(map(genes[5],0, 1,20,250)));
-    var xoffInc = map(genes[6], 0, 1, 0.001, 0.3);
+    var xoffInc = map(genes[6], 0, 1, 0.008, 0.012);
     var yoffInc = map(genes[7], 0, 1, 0.001, 0.05);
+    var xoffOffset = genes[8]*100;
     
     //var yMax = map(genes[7], 0, 1, 3*rectHeight/4, rectHeight);
 
@@ -64,7 +65,7 @@ function Painting(dna_, x_, y_) {
   noFill();
  
   beginShape(); 
-  var xoff = 0;       // Option #1: 2D Noise
+  var xoff = 0 + this.x + this.y;   //Sloppy way to make them not totally alike in terms of noise period
   for (var x = 0; x <= rectWidth; x += xInc) { //genes4
     // Calculate a y value according to noise, map to 
     
@@ -72,7 +73,7 @@ function Painting(dna_, x_, y_) {
     var y = map(noise(xoff, yoff), 0, 1, 0,rectHeight); //genes5-6
     // Set the vertex
     vertex(x, y); 
-    xoff += 0.01; //genes7
+    xoff += xoffInc; //genes7
   }
   // increment y dimension for noise
   yoff += 0.003; //genes 8
@@ -87,7 +88,7 @@ function Painting(dna_, x_, y_) {
     // Draw the bounding box
     
     
-    if (showInfo == true) {
+    /*if (showInfo == true) {
     pg.colorMode(RGB,255, 255, 255)
     pg.stroke(255,255,255);
     
@@ -100,7 +101,7 @@ function Painting(dna_, x_, y_) {
     }
     rectMode(CENTER);
     //pg.rect(0, 0, this.rectW, this.rectH);
-    }
+    }*/
     
     
     pop();
@@ -109,7 +110,7 @@ function Painting(dna_, x_, y_) {
     textAlign(CENTER);
     if (this.rolloverOn) fill(150);
     else fill(255);
-    pg.text('' + floor(this.fitness), this.x, this.y + 55);
+    text('' + floor(this.fitness), this.x, this.y + 55);
     }
   }
 

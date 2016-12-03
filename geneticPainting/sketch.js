@@ -15,9 +15,6 @@ ws.onmessage = function(e) {
 }
 
 
-//pGraphics
-var pg;
-
 //Noise Start
 var yoff = 0.0; 
 
@@ -44,8 +41,6 @@ function setup() {
   background(0);
   pixelDensity(2);
   
-  pg = createGraphics(displayWidth, displayHeight);
-  
   var mutationRate = 0.05; // A pretty high mutation rate here, our population is rather small we need to enforce variety
   // Create a population with a target phrase, mutation rate, and population max
   population = new Population(mutationRate, popmax);
@@ -64,10 +59,8 @@ function setup() {
 }
 
 function draw() {
-  if (showInfo) pg.background(0);
-  
   //background(1);
-  // Display the faces
+  
   population.display();
   if (gazeControl) {
     population.rollover(eyeX, eyeY);
@@ -79,7 +72,6 @@ function draw() {
 
   info.html("Generation #:" + population.getGenerations());
   
-  if (showInfo) image(pg,0,0);
 }
 
 // If the button is clicked, evolve next generation
@@ -101,13 +93,6 @@ function keyPressed() {
   } else if (key === '4') {
     showInfo =! showInfo;
     
-    if (showInfo == false) {
-      pg.clear;
-    background(0);
-      
-    }
-    
-    console.log(showInfo);
   }
 
 }
