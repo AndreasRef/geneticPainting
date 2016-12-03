@@ -42,7 +42,7 @@ var buttonText = "Click here to progess";
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(0);
-  pixelDensity(1);
+  pixelDensity(2);
   
   pg = createGraphics(displayWidth, displayHeight);
   
@@ -59,7 +59,7 @@ function setup() {
   
   fill(255);
   stroke(255);
-  frameRate(10);
+  //frameRate(10);
   background(0);
 }
 

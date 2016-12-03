@@ -26,7 +26,7 @@ function Painting(dna_, x_, y_) {
     var s = map(genes[1], 0,1,0.0,0.5);
     var b = map(genes[2], 0,1,0.5,1);
     var a = map(genes[4],0,1,0.03,0.2);
-    var xInc =  floor(rectWidth/(map(genes[5],0, 1,1,50)));
+    var xInc =  floor(rectWidth/(map(genes[5],0, 1,20,250)));
     var xoffInc = map(genes[6], 0, 1, 0.001, 0.3);
     var yoffInc = map(genes[7], 0, 1, 0.001, 0.05);
     
@@ -39,7 +39,7 @@ function Painting(dna_, x_, y_) {
     //NOISE
     push();
     translate(-rectWidth / 2, -rectHeight / 2);
-    colorMode(HSB, 1);
+    /*colorMode(HSB, 1);
     stroke(h,s,b, a); //genes 0-3
     noFill();
 
@@ -56,8 +56,29 @@ function Painting(dna_, x_, y_) {
     // increment y dimension for noise
     yoff += yoffInc; //genes 8
     endShape();
-    pop();
+    pop();*/
 
+  
+  colorMode(HSB, 1);
+  stroke(h,s,b, a); //genes 0-3
+  noFill();
+ 
+  beginShape(); 
+  var xoff = 0;       // Option #1: 2D Noise
+  for (var x = 0; x <= rectWidth; x += xInc) { //genes4
+    // Calculate a y value according to noise, map to 
+    
+    // Option #1: 2D Noise
+    var y = map(noise(xoff, yoff), 0, 1, 0,rectHeight); //genes5-6
+    // Set the vertex
+    vertex(x, y); 
+    xoff += 0.01; //genes7
+  }
+  // increment y dimension for noise
+  yoff += 0.003; //genes 8
+ 
+  endShape();
+  pop();
 
 
 

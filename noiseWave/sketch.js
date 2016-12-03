@@ -1,7 +1,7 @@
 var yoff = 0.0;        // 2nd dimension of perlin noise
 
 function setup() {
-  createCanvas(710, 400);
+  createCanvas(300, 200);
 }
 
 function draw() {
