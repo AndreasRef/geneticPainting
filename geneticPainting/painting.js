@@ -32,22 +32,12 @@ function Painting(dna_, x_, y_) {
 
 
     //Testing out how to make the variables relative to the rectWidth - works with a steadily increasing rectWidth
-
     var genes = this.dna.genes;
-    /*    var r            = map(genes[0],0,1,0,70*(map(rectWidth, rectWidthStart, rectWidthStart*1.5*1.5*1.5,1,3.375)));
-        var c            = color(genes[1],genes[2],genes[3]);
-        var eye_y        = map(genes[4],0,1,0,5*(map(rectWidth, rectWidthStart, rectWidthStart*1.5*1.5*1.5,1,3.375)));
-        var eye_x        = map(genes[5],0,1,0,10*(map(rectWidth, rectWidthStart, rectWidthStart*1.5*1.5*1.5,1,3.375)));
-        var eye_size     = map(genes[5],0,1,0,10*(map(rectWidth, rectWidthStart, rectWidthStart*1.5*1.5*1.5,1,3.375)));
-        var eyecolor     = color(genes[4],genes[5],genes[6]);
-        var mouthColor   = color(genes[7],genes[8],genes[9]);
-        var mouth_y      = map(genes[5],0,1,0,25*(map(rectWidth, rectWidthStart, rectWidthStart*1.5*1.5*1.5,1,3.375)));
-        var mouth_x      = map(genes[5],0,1,-25*(map(rectWidth, rectWidthStart, rectWidthStart*1.5*1.5*1.5,1,10)),25*(map(rectWidth, rectWidthStart, rectWidthStart*1.3*1.5*2,1,3.375)));
-        var mouthw       = map(genes[5],0,1,0,50*(map(rectWidth, rectWidthStart, rectWidthStart*1.5*1.5*1.5,1,3.375)));
-        var mouthh       = map(genes[5],0,1,0,10*(map(rectWidth, rectWidthStart, rectWidthStart*1.5*1.5*1.5,1,3.375)));*/
-
-
-
+    //var r            = map(genes[0],0,1,0,70*(map(rectWidth, rectWidthStart, rectWidthStart*1.5*1.5*1.5,1,3.375)));
+    var h = genes[0];
+    var s = genes[1];
+    var b = genes[2];
+    var a            = map(genes[4],0,1,0,0.5);
 
     // Once we calculate all the above properties, we use those variables to draw rects, ellipses, etc.
     push();
@@ -57,12 +47,12 @@ function Painting(dna_, x_, y_) {
     push();
     translate(-rectWidth / 2, -rectHeight / 2);
     colorMode(HSB, 1);
-    stroke(0, 0.5, 0.5, 1.0); //genes 0-3
+    stroke(h,s,b, a); //genes 0-3
     noFill(255);
 
     beginShape();
     var xoff = 0; // Option #1: 2D Noise
-    for (var x = 0; x <= rectWidth; x += 1) { //genes4
+    for (var x = 0; x <= rectWidth; x += 10) { //genes4
       // Calculate a y value according to noise, map to 
 
       // Option #1: 2D Noise
@@ -96,10 +86,12 @@ function Painting(dna_, x_, y_) {
     pop();
 
     // Display fitness value
+    if (showInfo) {
     textAlign(CENTER);
-    if (this.rolloverOn) fill(0);
-    else fill(0.25);
+    if (this.rolloverOn) fill(150);
+    else fill(255);
     text('' + floor(this.fitness), this.x, this.y + 55);
+    }
   }
 
   this.getFitness = function() {

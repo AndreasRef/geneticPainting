@@ -22,8 +22,9 @@ var population;
 var info;
 
 var showEyePoint = false;
-var selectedStroke = true;
+var selectedStroke = false;
 var gazeControl = false;
+var showInfo = false;
 
 var rectWidthStart = rectWidth = 275;
 var rectHeightStart = rectHeight = 150;
@@ -36,7 +37,8 @@ var buttonText = "Click here to progess";
 
 function setup() {
   createCanvas(displayWidth, displayHeight - 100);
-  colorMode(RGB, 1.0, 1.0, 1.0, 1.0);
+  background(0);
+  
   var mutationRate = 0.05; // A pretty high mutation rate here, our population is rather small we need to enforce variety
   // Create a population with a target phrase, mutation rate, and population max
   population = new Population(mutationRate, popmax);
@@ -46,13 +48,15 @@ function setup() {
   button.position(spacing, height - 50);
   info = createDiv('');
   info.position(spacing, height - 25);
+  info.style("color","#FFFFFF");
   
-  
+  fill(255);
+  stroke(255);
   
 }
 
 function draw() {
-  background(1);
+  //background(1);
   // Display the faces
   population.display();
   if (gazeControl) {
@@ -65,11 +69,12 @@ function draw() {
 
   info.html("Generation #:" + population.getGenerations());
   
+  
 }
 
 // If the button is clicked, evolve next generation
 function nextGen() {
-  background(1);
+  background(0);
   population.selection();
   population.reproduction();
 }
@@ -83,6 +88,8 @@ function keyPressed() {
     gazeControl = !gazeControl;
   } else if (key === '3') {
     selectedStroke = !selectedStroke;
+  } else if (key === '4') {
+    var showInfo = ! showInfo;
   }
 
 }
