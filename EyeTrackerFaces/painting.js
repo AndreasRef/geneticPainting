@@ -1,11 +1,10 @@
 
-  // Create a new face
-  function Face(dna_, x_, y_) {
+  // Create a new paiting
+  function Painting(dna_, x_, y_) {
     this.rolloverOn = false; // Are we rolling over this face?
     this.dna = dna_; // Face's DNA
     this.x = x_;     // Position on screen
     this.y = y_;
-    //this.wh = rectSize;      // Size of square enclosing face
     this.rectW = rectWidth;
     this.rectH = rectHeight;
     
@@ -19,7 +18,7 @@
     // We are using the face's DNA to pick properties for this face
     // such as: head size, color, eye position, etc.
     // Now, since every gene is a floating point between 0 and 1, we map the values
-    var genes = this.dna.genes;
+ /*   var genes = this.dna.genes;
     var r            = map(genes[0],0,1,0,70);
     var c            = color(genes[1],genes[2],genes[3]);
     var eye_y        = map(genes[4],0,1,0,5);
@@ -30,7 +29,26 @@
     var mouth_y      = map(genes[5],0,1,0,25);
     var mouth_x      = map(genes[5],0,1,-25,25);
     var mouthw       = map(genes[5],0,1,0,50);
-    var mouthh       = map(genes[5],0,1,0,10);
+    var mouthh       = map(genes[5],0,1,0,10);*/
+    
+    
+    //Testing out how to make the variables relative to the rectWidth - works with a steadily increasing rectWidth
+    
+    var genes = this.dna.genes;
+    var r            = map(genes[0],0,1,0,70*(map(rectWidth, rectWidthStart, rectWidthStart*1.5*1.5*1.5,1,3.375)));
+    var c            = color(genes[1],genes[2],genes[3]);
+    var eye_y        = map(genes[4],0,1,0,5*(map(rectWidth, rectWidthStart, rectWidthStart*1.5*1.5*1.5,1,3.375)));
+    var eye_x        = map(genes[5],0,1,0,10*(map(rectWidth, rectWidthStart, rectWidthStart*1.5*1.5*1.5,1,3.375)));
+    var eye_size     = map(genes[5],0,1,0,10*(map(rectWidth, rectWidthStart, rectWidthStart*1.5*1.5*1.5,1,3.375)));
+    var eyecolor     = color(genes[4],genes[5],genes[6]);
+    var mouthColor   = color(genes[7],genes[8],genes[9]);
+    var mouth_y      = map(genes[5],0,1,0,25*(map(rectWidth, rectWidthStart, rectWidthStart*1.5*1.5*1.5,1,3.375)));
+    var mouth_x      = map(genes[5],0,1,-25*(map(rectWidth, rectWidthStart, rectWidthStart*1.5*1.5*1.5,1,10)),25*(map(rectWidth, rectWidthStart, rectWidthStart*1.3*1.5*2,1,3.375)));
+    var mouthw       = map(genes[5],0,1,0,50*(map(rectWidth, rectWidthStart, rectWidthStart*1.5*1.5*1.5,1,3.375)));
+    var mouthh       = map(genes[5],0,1,0,10*(map(rectWidth, rectWidthStart, rectWidthStart*1.5*1.5*1.5,1,3.375)));
+    
+    
+    
 
     // Once we calculate all the above properties, we use those variables to draw rects, ellipses, etc.
     push();
@@ -55,8 +73,14 @@
 
     // Draw the bounding box
     stroke(0.25);
-    if (this.rolloverOn) fill(0, 0.25);
-    else noFill();
+    noFill();
+    if (this.rolloverOn && selectedStroke) {
+      strokeWeight(5);
+      //fill(0, 0.25);
+    }
+    else { 
+      strokeWeight(1);
+    }
     rectMode(CENTER);
     rect(0, 0, this.rectW, this.rectH);
     pop();

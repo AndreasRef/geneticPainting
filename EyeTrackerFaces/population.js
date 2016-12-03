@@ -6,7 +6,7 @@ function Population(m, num) {
   this.generations = 0; // Number of generations
   for (var i = 0; i < num; i++) {
     //if (floor(i/rows))
-    this.population[i] = new Face(new DNA(), rectWidth / 2 + (i % rows) * (rectWidth + spacing), rectHeight / 2 + spacing + floor(i / rows) * (rectHeight + spacing));
+    this.population[i] = new Painting(new DNA(), rectWidth / 2 + (i % rows) * (rectWidth + spacing), rectHeight / 2 + spacing + floor(i / rows) * (rectHeight + spacing));
   }
 
   // Display all faces
@@ -61,8 +61,8 @@ function Population(m, num) {
         this.population = shorten(this.population);
         this.population = shorten(this.population);
         this.population = shorten(this.population);
-      rectWidth *= 1.3;
-      rectHeight *= 1.3;
+      rectWidth *= 1.5;
+      rectHeight *= 1.5;
         
       } else if (this.population.length == 9) {
         this.population = shorten(this.population);
@@ -77,8 +77,8 @@ function Population(m, num) {
         this.population = shorten(this.population);
         this.population = shorten(this.population);
         this.population = shorten(this.population);
-      rectWidth *= 2.0;
-      rectHeight *= 2.0;
+      rectWidth *= 1.5;
+      rectHeight *= 1.5;
         
       }
 
@@ -103,7 +103,7 @@ function Population(m, num) {
         // Fill the new population with the new child
         //this.population[i] = new Face(child, 50+i*(rectSize+spacing), 60);
 
-        this.population[i] = new Face(child, rectWidth / 2 + (i % rows) * (rectWidth + spacing), rectHeight / 2 + spacing + floor(i / rows) * (rectHeight + spacing));
+        this.population[i] = new Painting(child, rectWidth / 2 + (i % rows) * (rectWidth + spacing), rectHeight / 2 + spacing + floor(i / rows) * (rectHeight + spacing));
       }
       this.generations++;
     } else if (this.population.length == 1) {
@@ -115,17 +115,10 @@ function Population(m, num) {
       this.generations = 0;
 
       for (var i = 0; i < rows * columns; i++) {
-        this.population[i] = new Face(new DNA(), rectWidth / 2 + (i % rows) * (rectWidth + spacing), rectHeight / 2 + spacing + floor(i / rows) * (rectHeight + spacing));
+        this.population[i] = new Painting(new DNA(), rectWidth / 2 + (i % rows) * (rectWidth + spacing), rectHeight / 2 + spacing + floor(i / rows) * (rectHeight + spacing));
       
       }
-
-      console.log(rectWidth);
-    
-
-      //console.log(1);
-
     }
-
   }
 
   this.getGenerations = function() {

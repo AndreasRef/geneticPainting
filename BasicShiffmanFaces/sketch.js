@@ -2,10 +2,10 @@
 var population;
 var info;
 
-var rectSize = 100;
+//var rectSize = 100;
 
-var rectWidthStart = rectWidth = 300;
-var rectHeightStart = rectHeight = 175;
+var rectWidthStart = rectWidth = 275;
+var rectHeightStart = rectHeight = 150;
 
 var spacing = 10; 
 var rows = 4;
@@ -14,7 +14,7 @@ var popmax = rows*columns;
 var buttonText = "Click here to progess";
 
 function setup() {
-  createCanvas(displayWidth,displayHeight-75);
+  createCanvas(displayWidth,displayHeight-100);
   colorMode(RGB,1.0, 1.0, 1.0, 1.0);
   var mutationRate = 0.05;  // A pretty high mutation rate here, our population is rather small we need to enforce variety
   // Create a population with a target phrase, mutation rate, and population max
