@@ -13,6 +13,11 @@ ws.onmessage = function(e) {
   }
 }
 
+
+//Noise Start
+var yoff = 0.0; 
+
+//Genetic start
 var population;
 var info;
 
@@ -41,6 +46,9 @@ function setup() {
   button.position(spacing, height - 50);
   info = createDiv('');
   info.position(spacing, height - 25);
+  
+  
+  
 }
 
 function draw() {
@@ -56,10 +64,12 @@ function draw() {
   if (showEyePoint) ellipse(eyeX, eyeY, 10, 10);
 
   info.html("Generation #:" + population.getGenerations());
+  
 }
 
 // If the button is clicked, evolve next generation
 function nextGen() {
+  background(1);
   population.selection();
   population.reproduction();
 }
@@ -75,4 +85,24 @@ function keyPressed() {
     selectedStroke = !selectedStroke;
   }
 
+}
+
+
+//NOISE
+function updateNoise() {
+  var yoff = 0;
+  for (var y = 0; y < rowsNoise; y++) {
+    var xoff = 0;
+    for (var x = 0; x < colsNoise; x++) {
+      var index = x + y * colsNoise;
+      var angle = noise(xoff, yoff, zoff) * TWO_PI * 4;
+      var v = p5.Vector.fromAngle(angle);
+      v.setMag(1);
+      flowfield[index] = v;
+      xoff += inc;
+    }
+    yoff += inc;
+
+    zoff += 0.0003;
+  }
 }
