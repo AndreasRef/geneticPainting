@@ -6,17 +6,17 @@ function Population(m, num) {
   this.generations = 0; // Number of generations
   for (var i = 0; i < num; i++) {
     //if (floor(i/rows))
-    this.population[i] = new Painting(new DNA(), rectWidth / 2 + (i % rows) * (rectWidth + spacing), rectHeight / 2 + spacing + floor(i / rows) * (rectHeight + spacing));
+    this.population[i] = new Painting(new DNA(), rectWidth / 2 + (i % rows) * (rectWidth + spacing) + spacing, rectHeight / 2 + spacing + floor(i / rows) * (rectHeight + spacing));
   }
 
-  // Display all faces
+  // Display all paintings
   this.display = function() {
     for (var i = 0; i < this.population.length; i++) {
       this.population[i].display();
     }
   }
 
-  // Are we rolling over any of the faces?
+  // Are we rolling over any of the paintings?
   this.rollover = function(mx, my) {
     if (this.population.length > 1) { //Only if there are more than one in the population
       for (var i = 0; i < this.population.length; i++) {
@@ -61,8 +61,8 @@ function Population(m, num) {
         this.population = shorten(this.population);
         this.population = shorten(this.population);
         this.population = shorten(this.population);
-      rectWidth *= 1.5;
-      rectHeight *= 1.5;
+      rectWidth *= 1.4;
+      rectHeight *= 1.4;
         
       } else if (this.population.length == 9) {
         this.population = shorten(this.population);
@@ -70,15 +70,15 @@ function Population(m, num) {
         this.population = shorten(this.population);
         this.population = shorten(this.population);
         this.population = shorten(this.population);
-      rectWidth *= 1.5;
-      rectHeight *= 1.5;
+      rectWidth *= 1.6;
+      rectHeight *= 1.6;
         
       } else if (this.population.length == 4) {
         this.population = shorten(this.population);
         this.population = shorten(this.population);
         this.population = shorten(this.population);
-      rectWidth *= 1.5;
-      rectHeight *= 1.5;
+      rectWidth *= 1.9;
+      rectHeight *= 1.9;
         
       }
 
@@ -101,9 +101,8 @@ function Population(m, num) {
         // Mutate their genes
         child.mutate(this.mutationRate);
         // Fill the new population with the new child
-        //this.population[i] = new Face(child, 50+i*(rectSize+spacing), 60);
 
-        this.population[i] = new Painting(child, rectWidth / 2 + (i % rows) * (rectWidth + spacing), rectHeight / 2 + spacing + floor(i / rows) * (rectHeight + spacing));
+        this.population[i] = new Painting(child, rectWidth / 2 + (i % rows) * (rectWidth + spacing) + spacing, rectHeight / 2 + spacing + floor(i / rows) * (rectHeight + spacing));
       }
       this.generations++;
     } else if (this.population.length == 1) {

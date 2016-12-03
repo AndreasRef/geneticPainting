@@ -2,6 +2,7 @@
 var eyeX;
 var eyeY;
 
+
 ws = new WebSocket("ws://localhost:8887");
 
 ws.onmessage = function(e) {
@@ -13,6 +14,9 @@ ws.onmessage = function(e) {
   }
 }
 
+
+//pGraphics
+var pg;
 
 //Noise Start
 var yoff = 0.0; 
@@ -26,8 +30,8 @@ var selectedStroke = false;
 var gazeControl = false;
 var showInfo = false;
 
-var rectWidthStart = rectWidth = 275;
-var rectHeightStart = rectHeight = 150;
+var rectWidthStart = rectWidth = 300;
+var rectHeightStart = rectHeight = 175;
 
 var spacing = 10;
 var rows = 4;
@@ -36,8 +40,11 @@ var popmax = rows * columns;
 var buttonText = "Click here to progess";
 
 function setup() {
-  createCanvas(displayWidth, displayHeight - 100);
+  createCanvas(windowWidth, windowHeight);
   background(0);
+  pixelDensity(1);
+  
+  pg = createGraphics(displayWidth, displayHeight);
   
   var mutationRate = 0.05; // A pretty high mutation rate here, our population is rather small we need to enforce variety
   // Create a population with a target phrase, mutation rate, and population max
@@ -52,10 +59,13 @@ function setup() {
   
   fill(255);
   stroke(255);
-  
+  frameRate(10);
+  background(0);
 }
 
 function draw() {
+  if (showInfo) pg.background(0);
+  
   //background(1);
   // Display the faces
   population.display();
@@ -69,7 +79,7 @@ function draw() {
 
   info.html("Generation #:" + population.getGenerations());
   
-  
+  if (showInfo) image(pg,0,0);
 }
 
 // If the button is clicked, evolve next generation
@@ -83,13 +93,21 @@ function nextGen() {
 
 function keyPressed() {
   if (key === '1') {
-    showEyePoint = !showEyePoint;
+    showEyePoint =! showEyePoint;
   } else if (key === '2') {
-    gazeControl = !gazeControl;
+    gazeControl =! gazeControl;
   } else if (key === '3') {
-    selectedStroke = !selectedStroke;
+    selectedStroke =! selectedStroke;
   } else if (key === '4') {
-    var showInfo = ! showInfo;
+    showInfo =! showInfo;
+    
+    if (showInfo == false) {
+      pg.clear;
+    background(0);
+      
+    }
+    
+    console.log(showInfo);
   }
 
 }

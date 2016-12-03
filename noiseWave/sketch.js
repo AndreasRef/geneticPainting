@@ -25,8 +25,7 @@ function draw() {
   }
   // increment y dimension for noise
   yoff += 0.01; //genes 8
- /* vertex(width, height);
-  vertex(0, height);*/
+ 
   endShape();
   pop();
 }
