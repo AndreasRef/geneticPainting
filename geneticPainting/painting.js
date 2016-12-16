@@ -1,5 +1,4 @@
 /*To do
-
 - [ ] Make a version where all the drawings are pre-made (only do x iterations which are then displayed without any animation)
 - [ ] Make a version where all the drawings animate, but the background slowly erases them (so they don’t overpaint everything)
 - [ ] Fix the numbers and counting system
@@ -32,14 +31,14 @@ function Painting(dna_, x_, y_) {
     var genes = this.dna.genes;
     //var r            = map(genes[0],0,1,0,70*(map(rectWidth, rectWidthStart, rectWidthStart*1.5*1.5*1.5,1,3.375)));
     var h = genes[0];
-    var s = map(genes[1], 0,1,0.0,0.5);
-    var b = map(genes[2], 0,1,0.5,1);
-    var a = map(genes[4],0,1,0.03,0.2);
-    var xInc =  floor(rectWidth/(map(genes[5],0, 1,20,250)));
+    var s = map(genes[1], 0, 1, 0.0, 0.5);
+    var b = map(genes[2], 0, 1, 0.5, 1);
+    var a = map(genes[4], 0, 1, 0.03, 0.2);
+    var xInc = floor(rectWidth / (map(genes[5], 0, 1, 20, 250)));
     var xoffInc = map(genes[6], 0, 1, 0.008, 0.012);
-    var yoffInc = map(genes[7], 0, 1, 0.001, 0.005)*(rectHeight/height) ;
-    var xoffOffset = genes[8]*100;
-    
+    var yoffInc = map(genes[7], 0, 1, 0.001, 0.005) * (rectHeight / height);
+    var xoffOffset = genes[8] * 100;
+
     //var yMax = map(genes[7], 0, 1, 3*rectHeight/4, rectHeight);
 
     // Once we calculate all the above properties, we use those variables to draw rects, ellipses, etc.
@@ -49,66 +48,61 @@ function Painting(dna_, x_, y_) {
     //NOISE
     push();
     translate(-rectWidth / 2, -rectHeight / 2);
-  
-  colorMode(HSB, 1);
-  stroke(h,s,b, a); //genes 0-3
-  noFill();
- 
-  beginShape(); 
-  var xoff = 0 + this.x + this.y;   //Sloppy way to make them not totally alike in terms of noise period
-  for (var x = 0; x <= rectWidth; x += xInc) { //genes4
-    // Calculate a y value according to noise, map to 
-    
-    // Option #1: 2D Noise
-    var y = map(noise(xoff, yoff), 0, 1, 0,rectHeight); //genes5-6
-    // Set the vertex
-    vertex(x, y); 
-    xoff += xoffInc; //genes7
-  }
-  // increment y dimension for noise
-  yoff += yoffInc; 
- 
-  endShape();
-  pop();
 
-
-
-
-    
-    // Draw the bounding box - slightly off
-/*    if (showInfo == true) {
-    colorMode(RGB,255, 255, 255)
-    stroke(255,255,255);
-    
+    colorMode(HSB, 1);
+    stroke(h, s, b, a); //genes 0-3
     noFill();
-    if (this.rolloverOn && selectedStroke) {
-      strokeWeight(5);
-      //fill(0, 0.25);
-    } else {
-      strokeWeight(1);
+    
+    
+    
+    beginShape();
+    var xoff = 0 + this.x + this.y; //Sloppy way to make them not totally alike in terms of noise period
+    for (var x = 0; x <= rectWidth; x += xInc) { //genes4
+      // Calculate a y value according to noise, map to 2D noise
+      var y = map(noise(xoff, yoff), 0, 1, 0, rectHeight); //genes5-6
+      vertex(x, y);
+      xoff += xoffInc; //genes6
     }
-    rectMode(CENTER);
-    rect(0, 0, this.rectW, this.rectH);
-    }*/
-    
-    
+    // increment y dimension for noise
+    yoff += yoffInc;  //genes7
+    endShape();
+    pop();
+
+
+    // Draw the bounding box - slightly off
+    /*    if (showInfo == true) {
+        colorMode(RGB,255, 255, 255)
+        stroke(255,255,255);
+        
+        noFill();
+        if (this.rolloverOn && selectedStroke) {
+          strokeWeight(5);
+          //fill(0, 0.25);
+        } else {
+          strokeWeight(1);
+        }
+        rectMode(CENTER);
+        rect(0, 0, this.rectW, this.rectH);
+        }*/
+
+
     pop();
   }
-  
-  
+
+
   this.displayFitness = function() {
-    
+
     noStroke();
     fill(0);
     rectMode(CENTER, CENTER);
-    rect(this.x, this.y + 100,20, 20);
-    
+    rect(this.x, this.y + 100, 20, 20);
+
     textAlign(CENTER);
-    if (this.rolloverOn) fill(0,255,0);
+    if (this.rolloverOn) fill(0, 255, 0);
     else fill(255);
     text('' + floor(this.fitness), this.x, this.y + 100);
   }
-  
+
 
   this.getFitness = function() {
     return this.fitness;

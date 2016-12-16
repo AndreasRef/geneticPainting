@@ -14,7 +14,6 @@ ws.onmessage = function(e) {
   }
 }
 
-
 //Noise Start
 var yoff = 0.0; 
 
@@ -42,7 +41,7 @@ var spacing = 10;
 var rows = 4;
 var columns = 4;
 var popmax = rows * columns;
-var buttonText = "Click here to progess";
+var buttonText = "Evolve new generation";
 
 function setup() {
   //createCanvas(windowWidth, windowHeight);'
@@ -68,10 +67,10 @@ function setup() {
 }
 
 function draw() {
-  //background(1);
-  
+
   if (iterations < maxIterations) {
   population.display();
+  iterations++;
   }
   if (showInfo &&  population.getGenerations() < 3) population.displayFitness();
   
@@ -84,8 +83,6 @@ function draw() {
   if (showEyePoint) ellipse(eyeX, eyeY, 10, 10);
 
   info.html("Generation #:" + population.getGenerations());
-  
-  iterations++;
 }
 
 // If the button is clicked, evolve next generation
@@ -109,9 +106,7 @@ function keyPressed() {
     selectedStroke =! selectedStroke;
   } else if (key === '4') {
     showInfo =! showInfo;
-    
   }
-
 }
 
 
@@ -129,7 +124,6 @@ function updateNoise() {
       xoff += inc;
     }
     yoff += inc;
-
     zoff += 0.0003;
   }
 }
