@@ -1,4 +1,13 @@
-// Create a new paiting
+/*To do
+
+- [ ] Make a version where all the drawings are pre-made (only do x iterations which are then displayed without any animation)
+- [ ] Make a version where all the drawings animate, but the background slowly erases them (so they don’t overpaint everything)
+- [ ] Fix the numbers and counting system
+- [ ] Put it online without the Eye Tracking
+
+*/
+
+// Create a new painting
 function Painting(dna_, x_, y_) {
   this.rolloverOn = false; // Are we rolling over this painting?
   this.dna = dna_; // Painting's DNA
@@ -15,7 +24,7 @@ function Painting(dna_, x_, y_) {
   // Display the painting
   this.display = function() {
     // We are using the painting's DNA to pick properties for this painting
-    // such as: head size, color, eye position, etc.
+    // such as: color variables, noise increments etc
     // Now, since every gene is a floating point between 0 and 1, we map the values
     var genes = this.dna.genes;
 
@@ -40,25 +49,6 @@ function Painting(dna_, x_, y_) {
     //NOISE
     push();
     translate(-rectWidth / 2, -rectHeight / 2);
-    /*colorMode(HSB, 1);
-    stroke(h,s,b, a); //genes 0-3
-    noFill();
-
-    beginShape();
-    var xoff = 0; // Option #1: 2D Noise
-    for (var x = 0; x < rectWidth; x += xInc) { //genes4
-
-      // Option #1: 2D Noise
-      var y = map(noise(xoff, yoff), 0, 1, 0, rectHeight); //genes5
-      // Set the vertex
-      vertex(x, y);
-      xoff += xoffInc; //genes7
-    }
-    // increment y dimension for noise
-    yoff += yoffInc; //genes 8
-    endShape();
-    pop();*/
-
   
   colorMode(HSB, 1);
   stroke(h,s,b, a); //genes 0-3
@@ -76,7 +66,7 @@ function Painting(dna_, x_, y_) {
     xoff += xoffInc; //genes7
   }
   // increment y dimension for noise
-  yoff += yoffInc;// 0.003; //genes 8
+  yoff += yoffInc; 
  
   endShape();
   pop();
@@ -105,14 +95,16 @@ function Painting(dna_, x_, y_) {
     
     
     pop();
-    // Display fitness value
-    if (showInfo) {
+  }
+  
+  
+  this.displayFitness = function() {
     textAlign(CENTER);
     if (this.rolloverOn) fill(150);
     else fill(255);
     text('' + floor(this.fitness), this.x, this.y + 55);
-    }
   }
+  
 
   this.getFitness = function() {
     return this.fitness;

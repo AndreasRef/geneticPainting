@@ -15,6 +15,13 @@ function Population(m, num) {
       this.population[i].display();
     }
   }
+  
+  // Display fitness for  all paintings
+  this.displayFitness = function() {
+    for (var i = 0; i < this.population.length; i++) {
+      this.population[i].displayFitness();
+    }
+  }
 
   // Are we rolling over any of the paintings?
   this.rollover = function(mx, my) {

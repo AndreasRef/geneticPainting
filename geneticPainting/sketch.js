@@ -22,6 +22,14 @@ var yoff = 0.0;
 var population;
 var info;
 
+
+//Counter
+var iterations = 0;
+var animate = true;
+var maxIterations = 500;
+
+
+//Booleans
 var showEyePoint = false;
 var selectedStroke = false;
 var gazeControl = false;
@@ -37,7 +45,8 @@ var popmax = rows * columns;
 var buttonText = "Click here to progess";
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  //createCanvas(windowWidth, windowHeight);'
+  createCanvas((rectWidth+spacing)*4 + spacing, (rectHeight+spacing)*4 + spacing);
   background(0);
   pixelDensity(2);
   
@@ -61,7 +70,11 @@ function setup() {
 function draw() {
   //background(1);
   
+  if (iterations < maxIterations) {
   population.display();
+  }
+  if (showInfo) population.displayFitness();
+  
   if (gazeControl) {
     population.rollover(eyeX, eyeY);
   } else {
@@ -72,11 +85,14 @@ function draw() {
 
   info.html("Generation #:" + population.getGenerations());
   
+  iterations++;
 }
 
 // If the button is clicked, evolve next generation
 function nextGen() {
   background(0);
+  animate = true;
+  iterations = 0;
   population.selection();
   population.reproduction();
 }
@@ -86,6 +102,7 @@ function nextGen() {
 function keyPressed() {
   if (key === '1') {
     showEyePoint =! showEyePoint;
+    gazeControl =! gazeControl;
   } else if (key === '2') {
     gazeControl =! gazeControl;
   } else if (key === '3') {
