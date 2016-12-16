@@ -46,7 +46,7 @@ var buttonText = "Click here to progess";
 
 function setup() {
   //createCanvas(windowWidth, windowHeight);'
-  createCanvas((rectWidth+spacing)*4 + spacing, (rectHeight+spacing)*4 + spacing);
+  createCanvas((rectWidth+spacing)*4 + spacing, (rectHeight+spacing)*4 + spacing*4);
   background(0);
   pixelDensity(2);
   
@@ -73,7 +73,7 @@ function draw() {
   if (iterations < maxIterations) {
   population.display();
   }
-  if (showInfo) population.displayFitness();
+  if (showInfo &&  population.getGenerations() < 3) population.displayFitness();
   
   if (gazeControl) {
     population.rollover(eyeX, eyeY);

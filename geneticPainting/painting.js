@@ -75,22 +75,20 @@ function Painting(dna_, x_, y_) {
 
 
     
-    // Draw the bounding box
+    // Draw the bounding box - slightly off
+/*    if (showInfo == true) {
+    colorMode(RGB,255, 255, 255)
+    stroke(255,255,255);
     
-    
-    /*if (showInfo == true) {
-    pg.colorMode(RGB,255, 255, 255)
-    pg.stroke(255,255,255);
-    
-    pg.noFill();
+    noFill();
     if (this.rolloverOn && selectedStroke) {
-      pg.strokeWeight(5);
+      strokeWeight(5);
       //fill(0, 0.25);
     } else {
-      pg.strokeWeight(1);
+      strokeWeight(1);
     }
     rectMode(CENTER);
-    //pg.rect(0, 0, this.rectW, this.rectH);
+    rect(0, 0, this.rectW, this.rectH);
     }*/
     
     
@@ -99,10 +97,16 @@ function Painting(dna_, x_, y_) {
   
   
   this.displayFitness = function() {
+    
+    noStroke();
+    fill(0);
+    rectMode(CENTER, CENTER);
+    rect(this.x, this.y + 100,20, 20);
+    
     textAlign(CENTER);
-    if (this.rolloverOn) fill(150);
+    if (this.rolloverOn) fill(0,255,0);
     else fill(255);
-    text('' + floor(this.fitness), this.x, this.y + 55);
+    text('' + floor(this.fitness), this.x, this.y + 100);
   }
   
 
